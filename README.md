@@ -1,82 +1,77 @@
-# Project Template
+# 💧 Water Forecast AI
 
-This repository serves as a template for projects, offering a structured setup with Conda, pre-commit hooks, and automation tools to ensure code quality and streamline development workflows.
+Water Forecast AI is a project under development focused on data analysis and water consumption forecasting using Artificial Intelligence models.
 
----
+## 🚀 Features
 
-## **Features**
+- **Time series forecasting** with models such as LSTM, ARIMA, and Prophet.
+- **Exploratory Data Analysis (EDA)** and signal preprocessing.
+- **Evaluation metrics** including MAE, RMSE, and R².
+- **Modular structure** for reproducible ML pipelines and experiments.
+- **Type-safe Python code** with `mypy` support.
+- **Code formatting and linting** with `ruff`.
+- **Automated testing** with `pytest` and coverage reporting.
+- **Environment and tooling management** via `uv` and `pyproject.toml`.
 
-- Environment management with Conda and `conda-lock` for dependency locking.
-- Code quality checks with `ruff` and `mypy`.
-- Pre-commit hooks for automated linting and formatting.
-- Task automation using `Invoke` and `Makefile`.
-- Ready-to-use structure for source code and tests.
-- GitHub Actions workflows for CI/CD.
+## ⚙️ Environment Setup
 
----
+This project uses [`uv`](https://github.com/astral-sh/uv) for Python environment and dependency management.
 
-## **Requirements**
-
-- [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Mamba](https://mamba.readthedocs.io/).
-- `make` (optional but recommended for easier task management).
-
----
-
-## **Setup Instructions**
-
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   cd project-template
-   ```
-
-2. Create and activate the environment:
-
-   ```bash
-   make setup
-   ```
-
-3. Verify the setup:
-   ```bash
-   make lint
-   make test
-   ```
-
----
-
-## **Makefile Commands**
-
-| Command      | Description                                                                 |
-| ------------ | --------------------------------------------------------------------------- |
-| `make build` | Ensures the environment is created and updated with `conda`.                |
-| `make setup` | Sets up the Conda environment, installs dependencies, and pre-commit hooks. |
-| `make lint`  | Runs `ruff` and `mypy` to check code quality and type hints.                |
-| `make test`  | Runs the test suite using `pytest`.                                         |
-
----
-
-## **Pre-commit Hooks**
-
-This project uses pre-commit hooks to ensure consistent code quality. Installed hooks include:
-
-- `ruff` for linting and formatting.
-- `mypy` for static type checking.
-
-Hooks are installed automatically with `make setup`. To run them manually:
+### Install uv
 
 ```bash
-pre-commit run --all-files
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
----
+### Create and activate virtual environment
 
-## **Contributing**
+```bash
+uv venv .venv
+source .venv/bin/activate
+```
 
-1. Fork this repository.
-2. Create a new branch (`git checkout -b fb-your-feature-name`).
-3. Commit your changes with a meaningful message.
-4. Push to the branch (`git push origin fb-your-feature-name`).
-5. Open a pull request.
+### Install development dependencies
+
+```bash
+uv pip install -e ".[dev]"
+```
+
+## 🔒 Dependency Locking
+
+To generate a lockfile for reproducible environments:
+
+```bash
+pip-compile pyproject.toml --extra=dev --output-file=requirements.lock.txt
+```
+
+This ensures all dependencies (including transitive ones) are pinned and can be synced across environments with full reproducibility.
+
+## 🧪 Running Tests
+
+After activating the virtual environment:
+
+```bash
+pytest
+```
+
+With coverage report:
+
+```bash
+pytest --cov=water_forecast_ai --cov-report=term-missing
+```
+
+## 🧹 Code Quality Checks
+
+### Run Ruff (linter & formatter)
+
+```bash
+ruff check water_forecast_ai
+```
+
+### Run Mypy (type checker)
+
+```bash
+mypy water_forecast_ai
+```
 
 ---
